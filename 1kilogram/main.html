@@ -1,0 +1,65 @@
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" type="test/css" href="styles.css" />
+  <script src="jquery-1.7.1.min.js"></script>
+  <script src="loader.js"></script>
+  <script>
+    var access_token = "";
+
+    $(document).ready(function(){
+      var popupTabId;
+      var tabCallback = function(tabId, changeInfo, tab) {
+        if (tabId == popupTabId) {
+          if (getAccessToken(tab.url)) {
+            chrome.tabs.remove(tabId);
+            chrome.tabs.onUpdated.removeListener(tabCallback);
+          }
+        }
+      }
+      var popupCallback = function(win) {
+        console.debug(win);
+        if (getAccessToken(win.tabs[0].url) == false) {
+          popupTabId = win.tabs[0].id;
+          chrome.tabs.onUpdated.addListener(tabCallback);
+        }
+      }
+      $("a#login").click(function(){
+        chrome.windows.create({url:loginURL, width:610, height:300, type:"popup"}, popupCallback);
+      });
+
+      function getAccessToken(url) {
+        if (url.indexOf(callbackURLPrefix) == 0) {
+          access_token = url.substring(callbackURLPrefix.length);
+          console.debug(access_token);
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      $("a#test").click(function(){
+        loadFeed();
+/*        $.ajax({
+          url: "https://api.instagram.com/v1/users/self/feed?access_token=" + access_token,
+          dataType: "json",
+          success: function(data, textStatus, jqXHR){console.debug(data)},
+          error: function(jqXHR, textStatus, errorThrown){
+            alert("error:" + textStatus);
+          }
+        });*/
+      });
+
+   });
+  </script>
+</head>
+<body>
+
+<a id="login" href="#">login</a>
+<a id="test" href="#">test</a>
+
+<div id="thumbnails">
+</div>
+
+</body>
+</html>

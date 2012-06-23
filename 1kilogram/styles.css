@@ -1,0 +1,33 @@
+body {
+    font-size: 13px;
+}
+
+div.image_frame {
+    width: 320px;
+    margin: 4px;
+    float: left;
+    border: solid 1px #CCC;
+}
+
+div.image_frame img {
+    margin: 7px;
+}
+
+div.image_frame p.user {
+    margin: 0px;
+    padding: 0.25em 0em 0em 0.5em;
+    font-weight: bold;
+}
+
+div.image_frame p.created {
+    margin: -1em 0px 0px 0px;
+    padding: 0px 0.5em;
+    text-align: right;
+    font-size: 12px;
+}
+
+div.image_frame p.caption {
+    margin: 0px;
+    padding: 0.25em 1em 1em 1.5em;;
+}
+

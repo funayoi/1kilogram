@@ -1,0 +1,24 @@
+{
+    "name": "1kilogram",
+    "description": "Instagram viewer for chrome",
+    "version": "1",
+    "app": {
+        "launch": {
+          "local_path": "main.html"
+        }
+    },
+    "permissions": [
+        "tabs",
+        "https://api.instagram.com/",
+        "https://instagram.com/",
+        "http://instagram.com/"
+    ]/*,
+    "icons": {
+      "16": "icon_16.png",
+      "128": "icon_128.png"
+    }
+    */
+}
+
+// http://www.facebook.com/dialog/oauth/?scope=offline_access,user_activities,read_stream&client_id=244262125661854&redirect_uri=https://www.facebook.com/connect/login_success.html&%20response_type=token
+
