@@ -8,12 +8,24 @@
     var access_token = "";
 
     $(document).ready(function(){
+      var onWindowResize = function(){
+        var boxWidth = 330;
+        var newWidth = Math.floor(window.innerWidth / boxWidth) * boxWidth;
+        $("#thumbnails").width(newWidth);
+      };
+      $(window).resize(onWindowResize);
+      onWindowResize();
+
+
       var popupTabId;
-      var tabCallback = function(tabId, changeInfo, tab) {
+      var loginTabCallback = function(tabId, changeInfo, tab) {
         if (tabId == popupTabId) {
           if (getAccessToken(tab.url)) {
             chrome.tabs.remove(tabId);
-            chrome.tabs.onUpdated.removeListener(tabCallback);
+            chrome.tabs.onUpdated.removeListener(loginTabCallback);
+            // ログイン処理
+            updateSelfInfo();
+            $("#login_menu,#user_menu").toggle();
           }
         }
       }
@@ -21,7 +33,7 @@
         console.debug(win);
         if (getAccessToken(win.tabs[0].url) == false) {
           popupTabId = win.tabs[0].id;
-          chrome.tabs.onUpdated.addListener(tabCallback);
+          chrome.tabs.onUpdated.addListener(loginTabCallback);
         }
       }
       $("a#login").click(function(){
@@ -55,10 +67,22 @@
 </head>
 <body>
 
-<a id="login" href="#">login</a>
-<a id="test" href="#">test</a>
+<header>
+  <ul id="login_menu">
+    <li><a id="login" href="#">login</a></li>
+    <li><span>1 abv</span></li>
+    <li><span>2 efg</span></li>
+  </ul>
+  <ul id="user_menu">
+    <li><span id="username"></span></li>
+  </ul>
+</header>
 
-<div id="thumbnails">
+<div id="main">
+  <a id="test" href="#">test</a>
+
+  <div id="thumbnails">
+  </div>
 </div>
 
 </body>

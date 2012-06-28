@@ -1,6 +1,24 @@
 var callbackURLPrefix = "http://instagram.com/#access_token=";
 var loginURL = "https://instagram.com/oauth/authorize/?client_id=e0119e8eb2e0491ab67862b5d302646f&redirect_uri=http://instagram.com/&response_type=token";
 
+function updateSelfInfo() {
+    var apiURL = "https://api.instagram.com/v1/users/self?access_token=" + access_token;
+
+    $.ajax({
+        url: apiURL,
+        dataType: "json",
+        success: function(data, textStatus, jqXHR){
+            console.debug(data);
+            $("#username").text(data.data.username);
+            },
+        error: function(jqXHR, textStatus, errorThrown){
+            alert("error:" + textStatus);
+        }
+    });
+
+
+}
+
 function renderImages(feedObject) {
     for (var i in feedObject) {
         var entry = feedObject[i];

@@ -1,5 +1,51 @@
 body {
+    margin: 0px;
+    padding: 0px;
     font-size: 13px;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    border-bottom: 1px solid #1C5380;
+    background-color: #4C82AC;
+    color: #FFF;
+    font-weight: bold;
+    height: 3em;
+    line-height: 3em;
+    text-align: right;
+}
+
+header ul {
+    display: inline;
+    list-style: none;
+    margin: 0em 1em;
+}
+
+header ul li {
+    display: inline-block;
+    border-left: 1px solid #1C5380;
+}
+header ul li a, header ul li span {
+    padding: 0em 1.5em;
+}
+
+header ul li a {
+    display: block;
+    color: #FFF;
+    text-decoration: none;
+}
+header ul li a:hover {
+    background-color: #1C5380;
+}
+
+#main {
+    position: relative;
+    top: 3em;
+}
+
+#user_menu {
+    display: none;
 }
 
 div.image_frame {
@@ -29,5 +75,10 @@ div.image_frame p.created {
 div.image_frame p.caption {
     margin: 0px;
     padding: 0.25em 1em 1em 1.5em;;
+}
+
+#thumbnails {
+    margin-left: auto;
+    margin-right: auto;
 }
 
