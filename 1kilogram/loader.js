@@ -48,6 +48,7 @@ function renderImages(feedObject) {
         imageFrame.append('<p class="caption">' + entry.caption.text + '</p>');
         $('#thumbnails').append(imageFrame);
     }
+    $(window).resize();
 }
 
 function loadFeed() {
