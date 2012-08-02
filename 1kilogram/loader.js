@@ -45,7 +45,9 @@ function renderImages(feedObject) {
         imageFrame.append('<img src="' + entry.images.low_resolution.url + '"/>');
         imageFrame.append('<p class="user">' + entry.user.username + '</p>');
         imageFrame.append('<p class="created">' + daysBefore + '</p>');
-        imageFrame.append('<p class="caption">' + entry.caption.text + '</p>');
+        if (entry.caption) {
+            imageFrame.append('<p class="caption">' + entry.caption.text + '</p>');
+        }
         $('#thumbnails').append(imageFrame);
     }
     $(window).resize();
