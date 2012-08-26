@@ -25,7 +25,6 @@ function renderImages(feedObject) {
         //console.debug(entry);
 
         var created = new Date(entry.created_time * 1000);
-        console.debug(created);
         created.setHours(0); created.setMinutes(0); created.setSeconds(0); created.setMilliseconds(0);
         var now = new Date();
         now.setHours(0); now.setMinutes(0); now.setSeconds(0); now.setMilliseconds(0);
@@ -38,16 +37,33 @@ function renderImages(feedObject) {
         } else {
             daysBefore = diffDays.toFixed() + "日前"
         }
-        console.debug(created);
-        console.debug(now);
 
         var imageFrame = $('<div class="image_frame"></div>');
         imageFrame.append('<img src="' + entry.images.low_resolution.url + '"/>');
-        imageFrame.append('<p class="user">' + entry.user.username + '</p>');
+        imageFrame.append('<p class="user"><span class="username">' + entry.user.username + '</span></p>');
         imageFrame.append('<p class="created">' + daysBefore + '</p>');
         if (entry.caption) {
             imageFrame.append('<p class="caption">' + entry.caption.text + '</p>');
         }
+        
+        if (entry.comments.count > 0) {
+            var comments = $('<div class="comments"></div>');
+            for (var k in entry.comments.data) {
+                comments.append('<div class="comment"><span class="username">'
+                    + entry.comments.data[k].from.username
+                    + '</span> <span class="caption">' + entry.comments.data[k].text + '</span></div>');
+            }
+            imageFrame.append(comments);
+        }
+
+        var likes = $('<div class="likes"></div>');
+        if (entry.likes.count > 0) {
+            for (var k in entry.likes.data) {
+                likes.append('<span class="like" title="' + entry.likes.data[k].username + '">&hearts;</span>');
+            }
+        }
+        imageFrame.append(likes);
+
         $('#thumbnails').append(imageFrame);
     }
     $(window).resize();

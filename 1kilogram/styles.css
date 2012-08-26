@@ -49,6 +49,15 @@ header ul li a:hover {
     display: none;
 }
 
+.username {
+    font-weight: bold;
+    color: #06365F;
+}
+
+.caption {
+    color: #222;
+}
+
 div.image_frame {
     width: 320px;
     margin: 4px;
@@ -63,7 +72,6 @@ div.image_frame img {
 div.image_frame p.user {
     margin: 0px;
     padding: 0.25em 0em 0em 0.5em;
-    font-weight: bold;
 }
 
 div.image_frame p.created {
@@ -75,7 +83,24 @@ div.image_frame p.created {
 
 div.image_frame p.caption {
     margin: 0px;
-    padding: 0.25em 1em 1em 1.5em;;
+    padding: 0.25em 1em 1em 1.5em;
+}
+
+div.image_frame div.comments {
+    padding: 0.25em 1.5em 1em 2em;
+}
+
+div.image_frame div.comments .comment:before {
+    content:"↪ ";
+}
+
+div.image_frame div.likes {
+    padding: 0em 1.5em 1em 1.5em;
+}
+
+.like {
+    color: #999;
+    text-shadow: 1px 1px 3px #999;
 }
 
 #thumbnails {
