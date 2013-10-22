@@ -1,3 +1,4 @@
+var access_token = "";
 var callbackURLPrefix = "http://instagram.com/#access_token=";
 var loginURL = "https://instagram.com/oauth/authorize/?client_id=e0119e8eb2e0491ab67862b5d302646f&redirect_uri=http://instagram.com/&response_type=token";
 
@@ -9,8 +10,11 @@ function updateSelfInfo() {
         dataType: "json",
         success: function(data, textStatus, jqXHR){
             console.debug(data);
+            // ユーザー情報の表示
             $("#username").text(data.data.username);
-            },
+            // フィードを読み込む
+            loadFeed();
+        },
         error: function(jqXHR, textStatus, errorThrown){
             alert("error:" + textStatus);
         }
